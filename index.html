@@ -20,6 +20,45 @@
 
   </head>
   <body>
+
+<!-- Add this within the body tag to support multiple characters -->
+<div id="characterSelection" class="middleColumnScreen" style="flex-grow:1; display:none; overflow: auto;">
+  <button id="characterSelectionOpenLeftColumnButton" class="openLeftColumnButton" style="background: var(--button-bg);border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">Select Characters</button>
+  <div id="characterList"></div>
+</div>
+
+<div id="chatInterface" class="middleColumnScreen" style="display:flex; flex-grow:1; flex-direction:column; height:100%; position:relative;">
+  <div id="builtInChatInterfaceWrapper">
+    <div id="messageFeedHeaderBar" style="display: flex; position:absolute;height: 2rem;right: 0;left: 0;margin: 0.5rem; z-index:30;">
+      <button id="messageFeedOpenLeftColumnButton" class="openLeftColumnButton" style="display:none; background: var(--button-bg);border-radius: var (--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">Open Threads</button>
+      <div style="background: var(--button-bg); display:flex; height: 100%; border-radius: var(--border-radius);border: 1px solid var(--button-border-color);padding: 0.25rem;">
+        <div style="display: flex;align-items: center;font-size:var(--button-font-size);margin-right: 0.25rem;">model:</div>
+        <select id="threadModelSelector" style="max-width:130px;"></select>
+      </div>
+    </div>
+    <div id="chatBackgroundCtn" style="pointer-events:none; position:absolute; top:0; left:0; right:0; bottom:0; z-index:-10;"></div>
+    <div id="noMessagesNotice" style="display:none; text-align:center; padding:1rem; margin-top:4rem;">Type a message to begin the chat.</div>
+    <div id="messageFeed" style="flex-grow:1; overflow-y:auto;"></div>
+    <div id="statusNotifier" style="text-align: center; display: none; height: 0; position: relative; top: -0.4rem; display: flex; align-items: center; justify-content: center;"></div>
+    <div id="inputWrapper" style="display:flex; padding:0.5rem; padding-left:0; padding-right:0; flex-direction:column;">
+      <div id="userMessagesSentHistoryCtn"></div>
+      <div id="shortcutButtonsCtn"></div>
+      <div style="display:flex;">
+        <textarea id="messageInput" style="flex-grow:1; min-height:4rem; font-size:100%;" title="commands:&#10;/ai - prompt a reply from ai&#10;/ai &lt;instruction&gt; - prompt reply with instruction&#10;/ai &lt;character&gt; - prompt reply from specific character"></textarea>
+        <div style="display:flex; flex-direction:column; margin-left:0.25rem;">
+          <button id="sendButton" style="min-width:80px; flex-grow:1;">send</button>
+          <div style="position:relative;">
+            <div id="threadOptionsPopup" style="position:absolute; display:none; padding:0.5rem; background:var(--background); border-radius:var(--border-radius); width:max-content; right:0;">
+              <button id="addShortcutButton">\u2728 add shortcut</button>
+            </div>
+          </div>
+          <button id="threadOptionsButton" style="min-width:80px; margin-top:0.25rem;">options</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
     <style>
       :root, :root.light {
         --background: #e8e8e8;
@@ -9048,5 +9087,33 @@
       }
     </script>
 
+// Load multiple characters in a single thread
+    <script>
+let characters = [];
+document.getElementById('newCharacterButton').addEventListener('click', () => {
+  let characterName = prompt('Enter character name:');
+  if (characterName) {
+    characters.push({ name: characterName, messages: [] });
+    renderCharacterList();
+  }
+});
+
+function renderCharacterList() {
+  let characterListEl = document.getElementById('characterList');
+  characterListEl.innerHTML = '';
+  characters.forEach((character, index) => {
+    let characterEl = document.createElement('div');
+    characterEl.textContent = character.name;
+    characterEl.addEventListener('click', () => selectCharacter(index));
+    characterListEl.appendChild(characterEl);
+  });
+}
+
+function selectCharacter(index) {
+  let selectedCharacter = characters[index];
+  let messageInput = document.getElementById('messageInput');
+  messageInput.value += `\n[${selectedCharacter.name}] `;
+}</script>
+    
   </body>
 </html>
