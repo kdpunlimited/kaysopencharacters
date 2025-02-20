@@ -9087,33 +9087,7 @@
       }
     </script>
 
-// Load multiple characters in a single thread
-    <script>
-let characters = [];
-document.getElementById('newCharacterButton').addEventListener('click', () => {
-  let characterName = prompt('Enter character name:');
-  if (characterName) {
-    characters.push({ name: characterName, messages: [] });
-    renderCharacterList();
-  }
-});
 
-function renderCharacterList() {
-  let characterListEl = document.getElementById('characterList');
-  characterListEl.innerHTML = '';
-  characters.forEach((character, index) => {
-    let characterEl = document.createElement('div');
-    characterEl.textContent = character.name;
-    characterEl.addEventListener('click', () => selectCharacter(index));
-    characterListEl.appendChild(characterEl);
-  });
-}
-
-function selectCharacter(index) {
-  let selectedCharacter = characters[index];
-  let messageInput = document.getElementById('messageInput');
-  messageInput.value += `\n[${selectedCharacter.name}] `;
-}</script>
     
   </body>
 </html>
