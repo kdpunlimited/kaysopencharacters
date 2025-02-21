@@ -1,17 +1,16 @@
-(**Note**: This repo is in maintenance mode at the moment - bug fixes and small updates only. If you're working on adding substantial new features via a fork, please open an issue with a link and I'll put it here. Note that the system is very extensible via your character's [custom code](https://github.com/josephrocca/OpenCharacters/blob/main/docs/custom-code.md), so you should see if it's possible to achieve the feature that you want via that.)
+(**Note**: This repo is my (kdpunlimited) personal fork of Open Characters.)
 
 ![banner](https://user-images.githubusercontent.com/1167575/225629372-eb4de08a-ed62-4660-a83d-6e42a5c092d7.jpg)
 
 
 <p align="center">Similar to CharacterAI, but open source, and with much deeper character customization.</p>
 
-<p align="center"><b>⟶ <a href="https://josephrocca.github.io/OpenCharacters">Try it!</a> ⟵</b></p>
+<p align="center"><b>⟶ <a href="https://kdpunlimited.github.io/kaysopencharacters/">Link to my personal copy: Kay's Open Characters</a></b></p>
 
-<p align="center"><a href="https://discord.gg/5tkWXJFqPV">Discord Server</a></p>
-
-## Features:
+## Tips amd features from the original repo:
 * The whole web app is a single HTML file - no server (serve it [locally](https://github.com/josephrocca/OpenCharacters/blob/main/docs/local-setup.md) if you want).
 * All your data is stored in your browser's local storage (again, there is no server).
+* The system is very extensible via the character's [custom code](https://github.com/josephrocca/OpenCharacters/blob/main/docs/custom-code.md).
 * Share characters with a link - all character data is embedded within the link.
 * Auto-summarization algorithm (for old messages) which extends effective character memory/context size massively.
 * Characters automatically compress messages into 'memories' and retrieve relevant memories based on context. Can handle as many memories as you need - tens of thousands or more.
